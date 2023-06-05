@@ -1,97 +1,68 @@
 #!/usr/bin/python3
 """
-Create a rectangle class
+Defines a class Rectangle
 """
 
-class Rectangle:
-    """
-    The class rectangle
-    """
 
+class Rectangle:
+    """Representation of a rectangle"""
     def __init__(self, width=0, height=0):
-        """ Initialize rectangles """
+        """initializing the rectangle by
+        setting the objet with width and height
+        """
         self.width = width
         self.height = height
 
+    def __del__(self):
+        """prints a string when an instance has been deleted"""
+        print("Bye rectangle...")
+
     @property
     def width(self):
-        """
-        The width getter
-        Returns the self width
-        """
+        """getter for the private instance attribute width"""
         return self.__width
 
     @width.setter
     def width(self, value):
-        """
-        defining the width setter
-        Raise a TypeError and ValueError if some conditions are not met
-        """
-        if not isinstance(value, int):
+        """setter for the private instance attribute width"""
+        if type(value) is not int:
             raise TypeError("width must be an integer")
-
         if value < 0:
             raise ValueError("width must be >= 0")
-
         self.__width = value
 
     @property
     def height(self):
-        """
-        The height getter
-        Returns the height
-        """
+        """getter for the private instance attribute height"""
         return self.__height
 
     @height.setter
     def height(self, value):
-        """
-        The height setter
-        Raise a TypeError and ValueError if soe conditions are not met
-        """
-        if not isinstance(value, int):
+        """setter for the private instance attribute height"""
+        if type(value) is not int:
             raise TypeError("height must be an integer")
-
         if value < 0:
             raise ValueError("height must be >= 0")
-
         self.__height = value
 
     def area(self):
-        """
-        Public instance method: def area(self): that returns the rectangle area
-        """
-        return (self.__width * self.__height)
+        """returns the area of the rectangle"""
+        return self.__width * self.__height
 
     def perimeter(self):
-        """
-        Public instance method that returns the rectangle perimeter
-        if width or height is equal to 0, perimeter is equal to 0
-        """
+        """returns the perimeter of the rectangle"""
         if self.__width == 0 or self.__height == 0:
             return 0
-
-        return (2 * self.__width) + (2 * self.__height)
+        return (self.__width * 2) + (self.__height * 2)
 
     def __str__(self):
-        """
-        print() and str() should print the rectangle with the character #
-        """
-        if self.__width == 0 or self.__height == 0:
-            return ""
-
-        st = "\n".join(["#" * self.__width for rows in range(self.__height)])
-        return st
+        """returns printable string representation of the rectangle"""
+        string = ""
+        if self.__width != 0 and self.__height != 0:
+            string += "\n".join("#" * self.__width
+                                for j in range(self.__height))
+        return string
 
     def __repr__(self):
-        """
-        return a string representation of the rectangle
-        to recreate a new instance
-        """
-        return ("Rectangle({:d}, {:d})".format(self.__width, self.__height))
-
-    def __del__(self):
-        """
-        deletes an instance
-        """
-        print("Bye rectangle...")
+        """returns a string representation of the rectangle for reproduction"""
+        return "Rectangle({:d}, {:d})".format(self.__width, self.__height)
